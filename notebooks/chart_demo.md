@@ -1,26 +1,32 @@
-# ---
-# jupyter:
-#   jupytext:
-#     cell_metadata_filter: -all
-#     text_representation:
-#       extension: .py
-#       format_name: light
-#       format_version: '1.5'
-#       jupytext_version: 1.16.6
-#   kernelspec:
-#     display_name: Python 3 (ipykernel)
-#     language: python
-#     name: python3
-# ---
+---
+jupyter:
+  jupytext:
+    cell_metadata_filter: -all
+    text_representation:
+      extension: .md
+      format_name: markdown
+      format_version: '1.3'
+      jupytext_version: 1.16.6
+  kernelspec:
+    display_name: Python 3 (ipykernel)
+    language: python
+    name: python3
+---
 
+```python
 from datetime import datetime, timedelta
+```
 
+```python
 import numpy as np
 import pandas as pd
+```
 
+```python
 from bhav_scopy_py.charts.trading_chart import ChartConfig, TradingChart
+```
 
-
+```python
 def generate_sample_ohlc(n_periods=100, start_price=100, volatility=0.02):
     np.random.seed(42)  # For reproducibility
     dates = [datetime.now() - timedelta(days=x) for x in range(n_periods)]
@@ -50,11 +56,15 @@ def generate_sample_ohlc(n_periods=100, start_price=100, volatility=0.02):
         )
 
     return data
+```
 
-
+```python
 sample_data = generate_sample_ohlc()
 chart = TradingChart.create(ChartConfig(width=800, height=500))
 chart._chart_data = sample_data
 chart
+```
 
+```python
 
+```
