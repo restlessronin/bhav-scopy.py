@@ -13,7 +13,7 @@ build-backend = "hatchling.build"
 requires = ["hatchling"]
 
 [tool.jupytext]
-formats = "ipynb,md,py"
+formats = "ipynb,py"
 cell_metadata_filter = "-all"
 
 [tool.pytest.ini_options]
