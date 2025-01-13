@@ -6,7 +6,10 @@ authors = [
     { name = "restlessronin", email = "88921269+restlessronin@users.noreply.github.com" },
 ]
 requires-python = ">=3.10,<3.12"
-dependencies = ["anywidget>=0.9.13"]
+dependencies = [
+    "anywidget>=0.9.13",
+    "pydantic>=2.10.5",
+]
 
 [build-system]
 build-backend = "hatchling.build"

@@ -8,18 +8,19 @@
 #       format_version: '1.5'
 #       jupytext_version: 1.16.6
 #   kernelspec:
-#     display_name: Python 3 (ipykernel)
+#     display_name: .venv (3.10.15)
 #     language: python
 #     name: python3
 # ---
 
+# +
 from datetime import datetime, timedelta
-
 import numpy as np
-import pandas as pd
 
 from bhav_scopy_py.charts.trading_chart import ChartConfig, TradingChart
 
+
+# -
 
 def generate_sample_ohlc(n_periods=100, start_price=100, volatility=0.02):
     np.random.seed(42)  # For reproducibility
@@ -52,9 +53,15 @@ def generate_sample_ohlc(n_periods=100, start_price=100, volatility=0.02):
     return data
 
 
+# +
+config = ChartConfig(width=800, height=500)
+chart = TradingChart.create(config)
+
+candlestick_series = chart.add_candlestick_series()
 sample_data = generate_sample_ohlc()
-chart = TradingChart.create(ChartConfig(width=800, height=500))
-chart._chart_data = sample_data
+candlestick_series.set_data(sample_data)
+
 chart
+# -
 
 
