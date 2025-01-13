@@ -69,7 +69,8 @@ class Series:
         self.chart._update_series_configs()
 
     def update_data(self, data_point: dict):
-        self._data.append(data_point)
+        self.data.append(data_point)
+        self.chart._update_series_configs()
 
     def to_config(self) -> SeriesConfig:
         return SeriesConfig(
