@@ -44,6 +44,7 @@ models/checkpoints/
 wandb/
 logs/
 .uv/
+.ipynb_checkpoints
 
 # OS-specific
 .DS_Store

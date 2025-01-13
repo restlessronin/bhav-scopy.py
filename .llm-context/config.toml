@@ -20,7 +20,7 @@ with_user_notes = false
 
 [profiles.code-prompt]
 base = "code"
-prompt = "lc-prompt.md"
+prompt = "python-prompt.md"
 
 [profiles.code-file]
 base = "code"
