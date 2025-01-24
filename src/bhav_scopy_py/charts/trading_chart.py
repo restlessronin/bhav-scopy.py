@@ -1,6 +1,6 @@
 import json
 from pathlib import Path
-from typing import Any, Optional
+from typing import Optional
 from uuid import uuid4
 
 import anywidget
@@ -52,7 +52,7 @@ class TradingChart(anywidget.AnyWidget):
             config = ChartConfig()
 
         super().__init__(
-            _esm=f"import 'https://unpkg.com/lightweight-charts@4.2.2/dist/lightweight-charts.standalone.production.js';\n"
+            _esm="import 'https://unpkg.com/lightweight-charts@4.2.2/dist/lightweight-charts.standalone.production.js';\n"
             + js_path.read_text(),
             _config=config.model_dump(by_alias=True),
             _js_calls=[],
