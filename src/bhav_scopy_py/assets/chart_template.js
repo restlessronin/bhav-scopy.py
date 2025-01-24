@@ -1,54 +1,39 @@
 function render({ model, el }) {
   console.log("Render function called");
-  const container = document.createElement("div");
-  container.style.width = "100%";
-  container.style.height = "100%";
+  const container = document.createElement('div');
+  container.style.width = '100%';
+  container.style.height = '100%';
   el.appendChild(container);
 
-  console.log("Creating chart with config:", model.get("_config"));
-  const chart = LightweightCharts.createChart(container, model.get("_config"));
+  // Create global variables
+  const chart = LightweightCharts.createChart(container, model.get('_config'));
+  const series = new Map();
 
-  const seriesMap = new Map();
-
-  function updateOrCreateSeries(seriesConfig) {
-    let series = seriesMap.get(seriesConfig.id);
-
-    if (!series) {
-      switch (seriesConfig.type) {
-        case 'candlestick':
-          series = chart.addCandlestickSeries(seriesConfig.style);
-          break;
-        case 'line':
-          series = chart.addLineSeries(seriesConfig.style);
-          break;
-        case 'histogram':
-          series = chart.addHistogramSeries(seriesConfig.style);
-          break;
-        default:
-          console.error('Unknown series type:', seriesConfig.type);
-          return;
-      }
-      seriesMap.set(seriesConfig.id, series);
+  // Execute each JS call in sequence
+  function executeCall(call) {
+    try {
+      console.log("Executing:", call);
+      // Make chart and series available directly
+      (new Function('chart', 'series', call))(chart, series);
+    } catch (error) {
+      console.error('Error executing:', call, '\nError:', error);
     }
-    series.setData(seriesConfig.data);
   }
 
-  const seriesConfigs = model.get("_series_configs");
-  console.log("Initial series configs:", seriesConfigs);
-  seriesConfigs.forEach(updateOrCreateSeries);
+  model.get('_js_calls').forEach(executeCall);
 
-  model.on("change:_series_configs", () => {
-    const configs = model.get("_series_configs");
-    console.log("Series configs updated:", configs);
-    configs.forEach(updateOrCreateSeries);
+  // Handle new calls
+  model.on('change:_js_calls', () => {
+    const newCalls = model.get('_js_calls');
+    if (newCalls.length > 0) {
+      executeCall(newCalls[newCalls.length - 1]);
+    }
   });
 
-  const resizeObserver = new ResizeObserver((entries) => {
+  // Handle resizing
+  const resizeObserver = new ResizeObserver(entries => {
     const { width, height } = entries[0].contentRect;
-    chart.applyOptions({
-      width,
-      height,
-    });
+    chart.applyOptions({ width, height });
   });
   resizeObserver.observe(container);
 
