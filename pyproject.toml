@@ -1,6 +1,6 @@
 [project]
 name = "bhav-scopy.py"
-description = "Market Charting Library for Notebooks"
+description = "Market Charting Widget for Notebooks"
 version = "0.1.0"
 authors = [
     { name = "restlessronin", email = "88921269+restlessronin@users.noreply.github.com" },
