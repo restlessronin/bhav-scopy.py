@@ -7,6 +7,7 @@ function render({ model, el }) {
 
   const chart = LightweightCharts.createChart(container, model.get('_config'));
   const series = new Map();
+  let processedCallCount = 0;
   function executeCall(call) {
     try {
       console.log("Executing:", call);
@@ -15,11 +16,14 @@ function render({ model, el }) {
       console.error('Error executing:', call, '\nError:', error);
     }
   }
-  model.get('_js_calls').forEach(executeCall);
+  const initialCalls = model.get('_js_calls');
+  initialCalls.forEach(executeCall);
+  processedCallCount = initialCalls.length;
   model.on('change:_js_calls', () => {
-    const newCalls = model.get('_js_calls');
-    if (newCalls.length > 0) {
-      executeCall(newCalls[newCalls.length - 1]);
+    const currentCalls = model.get('_js_calls');
+    while (processedCallCount < currentCalls.length) {
+      executeCall(currentCalls[processedCallCount]);
+      processedCallCount++;
     }
   });
   const resizeObserver = new ResizeObserver(entries => {
