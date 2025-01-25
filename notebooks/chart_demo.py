@@ -53,15 +53,13 @@ def generate_sample_data(n_periods=100, start_price=100, volatility=0.02):
     return data
 
 
-# Create chart with config
 config = ChartConfig(
     width=800,
-    height=500,
+    height=600,
     layout={"background": {"type": "solid", "color": "white"}, "textColor": "black"},
 )
 chart = TradingChart(config)
 
-# Add price series
 candlestick_series = chart.addCandlestickSeries(
     {
         "upColor": "#26a69a",
@@ -71,21 +69,12 @@ candlestick_series = chart.addCandlestickSeries(
     }
 )
 
-# Add volume series
-volume_series = chart.addHistogramSeries(
-    {
-        "priceFormat": {"type": "volume"},
-        "priceScaleId": "",  # Set to empty string for overlay
-    }
-)
+volume_series = chart.addHistogramSeries({"color": "#26a69a"})
 
-# Generate and set data
 data = generate_sample_data()
 
-# Set price data
 candlestick_series.setData(data)
 
-# Set volume data
 volume_data = [
     {
         "time": d["time"],
