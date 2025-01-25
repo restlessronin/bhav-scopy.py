@@ -8,7 +8,9 @@ A Python library for creating interactive trading charts in Jupyter notebooks, b
 - Responsive sizing and layout
 
 ## Installation
-```uv pip install bhav-scopy.py```
+```
+uv pip install git+https://github.com/restlessronin/bhav-scopy.py
+```
 
 ## Basic Usage
 ```python
