@@ -9,7 +9,7 @@ A Python library for creating interactive trading charts in Jupyter notebooks, b
 
 ## Installation
 ```
-uv pip install git+https://github.com/restlessronin/bhav-scopy.py
+uv pip install https://github.com/restlessronin/bhav-scopy.py
 ```
 
 ## Basic Usage
@@ -21,6 +21,6 @@ config = ChartConfig(width=800, height=600)
 chart = TradingChart(config)
 
 # Add candlestick series
-series = chart.addCandlestickSeries()
+series = chart.add_candlestick_series()
 series.setData(ohlcv_data)  # List of dicts with time, open, high, low, close
 ```

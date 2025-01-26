@@ -61,7 +61,7 @@ class TradingChart(anywidget.AnyWidget):
     def _add_js_call(self, js_call: str):
         self._js_calls = [*self._js_calls, js_call]
 
-    def addCandlestickSeries(self, options: Optional[dict] = None) -> Series:
+    def add_candlestick_series(self, options: Optional[dict] = None) -> Series:
         series_id = f"series_{uuid4().hex[:8]}"
         full_options = options or {}
         js_calls = [
@@ -71,7 +71,7 @@ class TradingChart(anywidget.AnyWidget):
         self._add_js_call(";".join(js_calls))
         return Series(series_id, self)
 
-    def addHistogramSeries(self, options: Optional[dict] = None) -> Series:
+    def add_histogram_series(self, options: Optional[dict] = None) -> Series:
         series_id = f"series_{uuid4().hex[:8]}"
         full_options = {
             "priceFormat": {"type": "volume"},
@@ -83,4 +83,11 @@ class TradingChart(anywidget.AnyWidget):
             f"series.get('{series_id}').priceScale().applyOptions({{scaleMargins: {{top: 0.7, bottom: 0}}}});",
         ]
         self._add_js_call(";".join(js_calls))
+        return Series(series_id, self)
+
+    def add_line_series(self, options: Optional[dict] = None) -> Series:
+        series_id = f"series_{uuid4().hex[:8]}"
+        full_options = options or {}
+        js_call = f"series.set('{series_id}', chart.addLineSeries({json.dumps(full_options)}))"
+        self._add_js_call(js_call)
         return Series(series_id, self)

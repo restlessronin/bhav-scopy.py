@@ -60,7 +60,7 @@ config = ChartConfig(
 )
 chart = TradingChart(config)
 
-candlestick_series = chart.addCandlestickSeries(
+candlestick_series = chart.add_candlestick_series(
     {
         "upColor": "#26a69a",
         "downColor": "#ef5350",
@@ -69,7 +69,7 @@ candlestick_series = chart.addCandlestickSeries(
     }
 )
 
-volume_series = chart.addHistogramSeries({"color": "#26a69a"})
+volume_series = chart.add_histogram_series({"color": "#26a69a"})
 
 data = generate_sample_data()
 
