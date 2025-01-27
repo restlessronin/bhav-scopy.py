@@ -31,11 +31,11 @@ class Series:
         self.id = series_id
         self.chart = chart
 
-    def setData(self, data: list[dict]):
+    def set_data(self, data: list[dict]):
         js_call = f"series.get('{self.id}').setData({json.dumps(data)});"
         self.chart._add_js_call(js_call)
 
-    def setMarkers(self, markers: list[dict]):
+    def set_markers(self, markers: list[dict]):
         js_call = f"series.get('{self.id}').setMarkers({json.dumps(markers)});"
         self.chart._add_js_call(js_call)
 
