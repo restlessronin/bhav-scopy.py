@@ -8,7 +8,7 @@
 #       format_version: '1.5'
 #       jupytext_version: 1.16.6
 #   kernelspec:
-#     display_name: Python 3 (ipykernel)
+#     display_name: .venv (3.10.15)
 #     language: python
 #     name: python3
 # ---
@@ -60,20 +60,20 @@ config = ChartConfig(
 )
 chart = TradingChart(config)
 
-candlestick_series = chart.add_candlestick_series(
-    {
-        "upColor": "#26a69a",
-        "downColor": "#ef5350",
-        "wickUpColor": "#26a69a",
-        "wickDownColor": "#ef5350",
-    }
-)
+candlestick_series = chart.add_candlestick_series({
+    "upColor": "#26a69a",
+    "downColor": "#ef5350",
+    "wickUpColor": "#26a69a",
+    "wickDownColor": "#ef5350",
+})
 
-volume_series = chart.add_histogram_series({"color": "#26a69a"})
+volume_series = chart.add_histogram_series({
+    "color": "#26a69a"
+})
 
 data = generate_sample_data()
 
-candlestick_series.setData(data)
+candlestick_series.set_data(data)
 
 volume_data = [
     {
@@ -83,7 +83,9 @@ volume_data = [
     }
     for d in data
 ]
-volume_series.setData(volume_data)
+volume_series.set_data(volume_data)
 
 # Display chart
 chart
+
+
